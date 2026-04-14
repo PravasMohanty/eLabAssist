@@ -1,11 +1,12 @@
 // src/routes/bill.routes.js
 import { Router } from "express";
-const BillRouter = Router
 
-const { createBill, listBills, getBillById, updateBill, getInvoice } = require("../controllers/bill.controller");
-const { authenticate } = require("../middleware/auth.middleware");
-const { authorize } = require("../middleware/role.middleware");
-const { validateCreateBill, validateUpdateBill } = require("../middleware/bill.validation");
+import { createBill, listBills, getBillById, updateBill, getInvoice } from "../controllers/bill.controller.js";
+import { authenticate } from "../middleware/auth.middleware.js";
+import { authorize } from "../middleware/role.middleware.js";
+import { validateCreateBill, validateUpdateBill } from "../middleware/bill.validation.js";
+
+const BillRouter = Router();
 
 // All routes require a valid JWT
 BillRouter.use(authenticate);
@@ -25,4 +26,4 @@ BillRouter.get("/:id", getBillById);
 // PUT /api/bills/:id
 BillRouter.put("/:id", authorize("admin"), validateUpdateBill, updateBill);
 
-module.exports = BillRouter;
+export default BillRouter;

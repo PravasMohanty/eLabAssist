@@ -1,6 +1,5 @@
-
 // src/utils/idGenerator.js
-const supabase = require("../config/db");
+import supabase from "../config/db.js";
 
 /**
  * Generates sequential IDs like BILL-0001, PAT-0042
@@ -27,7 +26,7 @@ const supabase = require("../config/db");
  * $$ LANGUAGE plpgsql;
  * ─────────────────────────────────────────────────
  */
-const generateBillId = async (prefix) => {
+export const generateBillId = async (prefix) => {
     const { data, error } = await supabase.rpc("increment_counter", {
         p_prefix: prefix,
     });
@@ -39,5 +38,3 @@ const generateBillId = async (prefix) => {
     const padded = String(data).padStart(4, "0");
     return `${prefix}-${padded}`;
 };
-
-module.exports = { generateBillId };

@@ -1,7 +1,7 @@
 // src/controllers/bill.controller.js
-const supabase = require("../config/db");
-const { generateBillId } = require("../utils/idGenerator");
-const { successResponse, errorResponse } = require("../utils/apiResponse");
+import supabase from "../config/db.js";
+import { generateBillId } from "../utils/idGenerator.js";
+import { successResponse, errorResponse } from "../utils/apiResponse.js";
 
 // ─────────────────────────────────────────────
 // POST /api/bills
@@ -254,4 +254,4 @@ const getInvoice = async (req, res) => {
     }
 };
 
-module.exports = { createBill, listBills, getBillById, updateBill, getInvoice };
+export { createBill, listBills, getBillById, updateBill, getInvoice };

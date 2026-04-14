@@ -1,11 +1,11 @@
 // src/middleware/bill.validation.js
-const { errorResponse } = require("../utils/apiResponse");
+import { errorResponse } from "../utils/apiResponse.js";
 
 const VALID_URGENCY = ["routine", "urgent", "emergency"];
 const VALID_PAYMENT_STATUS = ["unpaid", "partial", "paid", "refunded"];
 const VALID_STATUS = ["active", "cancelled", "void"];
 
-const validateCreateBill = (req, res, next) => {
+export const validateCreateBill = (req, res, next) => {
     const errors = [];
     const { patient_id, total_amount, urgency, payment_status, status } = req.body;
 
@@ -37,7 +37,7 @@ const validateCreateBill = (req, res, next) => {
     next();
 };
 
-const validateUpdateBill = (req, res, next) => {
+export const validateUpdateBill = (req, res, next) => {
     const errors = [];
     const { total_amount, discount, paid_amount, urgency, payment_status, status } = req.body;
 
@@ -63,5 +63,3 @@ const validateUpdateBill = (req, res, next) => {
 
     next();
 };
-
-module.exports = { validateCreateBill, validateUpdateBill };

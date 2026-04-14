@@ -1,9 +1,9 @@
 // src/config/db.js
-const { createClient } = require("@supabase/supabase-js");
+import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY // service role key — bypasses RLS for server-side ops
-);
+const supabaseUrl = process.env.SUPABASE_URL || "https://placeholder.supabase.co";
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "placeholder-key";
 
-module.exports = supabase;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default supabase;
