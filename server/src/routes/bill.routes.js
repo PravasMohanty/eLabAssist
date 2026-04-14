@@ -25,4 +25,4 @@ BillRouter.get("/:id", getBillById);
 // PUT /api/bills/:id
 BillRouter.put("/:id", authorize("admin"), validateUpdateBill, updateBill);
 
-module.exports = BillBillRouter;
+module.exports = BillRouter;
