@@ -1,0 +1,24 @@
+POST  http://localhost:5000/api/appointments/appointment
+Content-Type: application/json
+
+{
+  "patient_id": 2,
+  "disease_id": 2,
+  "appointment_date": "2026-04-20T10:00:00Z",
+  "notes": "Fever"
+}
+
+###
+GET http://localhost:5000/api/appointments/appointment/2
+
+###
+### Update Appointment Status
+PATCH http://localhost:5000/api/appointments/appointment/1/status
+Content-Type: application/json
+
+{
+  "status": "completed"
+}
+
+### Delete Appointment
+DELETE http://localhost:5000/api/appointments/appointment/1
