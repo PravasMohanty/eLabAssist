@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  patient_id Int @id @default(autoincrement())
+  name       String
+  phone      String
+  email      String?
+  created_at DateTime @default(now())
+
+  appointments Appointment[]
+}
+
+model Doctor {
+  doctor_id Int @id @default(autoincrement())
+  name       String
+  email      String
+  specialization String
+
+  diseases DoctorDisease[]
+  appointments Appointment[]
+}
+
+model Disease {
+  disease_id Int @id @default(autoincrement())
+  name       String
+
+  doctors DoctorDisease[]
+  appointments Appointment[]
+}
+
+model DoctorDisease {
+  id         Int @id @default(autoincrement())
+  doctor_id  Int
+  disease_id Int
+
+  doctor  Doctor  @relation(fields: [doctor_id], references: [doctor_id])
+  disease Disease @relation(fields: [disease_id], references: [disease_id])
+}
+
+model Appointment {
+  appointment_id Int @id @default(autoincrement())
+
+  patient_id Int
+  doctor_id  Int
+  disease_id Int
+
+  appointment_date DateTime
+  status String @default("pending")
+  notes  String?
+
+  patient Patient @relation(fields: [patient_id], references: [patient_id])
+  doctor  Doctor  @relation(fields: [doctor_id], references: [doctor_id])
+  disease Disease @relation(fields: [disease_id], references: [disease_id])
+
+  report Report?   
+
+  created_at DateTime @default(now())
+}
+
+model Report {
+  report_id Int @id @default(autoincrement())
+
+  appointment_id Int @unique
+  parameters Json
+  remarks String?
+  pathologistId String
+  status String
+
+  appointment Appointment @relation(fields: [appointment_id], references: [appointment_id])
+
+  created_at DateTime @default(now())
+}

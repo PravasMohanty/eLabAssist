@@ -1,1 +1,13 @@
 
+SUPABASE_URL="https://YOUR_PROJECT_ID.supabase.co"
+SUPABASE_SERVICE_ROLE_KEY="YOUR_SUPABASE_SERVICE_ROLE_KEY"
+
+PORT=8000
+
+JWT_ACCESS_SECRET="change-this-to-a-long-random-secret"
+JWT_REFRESH_SECRET="change-this-to-a-different-long-random-secret"
+
+JWT_ACCESS_EXPIRES_IN="15m"
+JWT_REFRESH_EXPIRES_IN="7d"
+
+BCRYPT_SALT_ROUNDS=10
